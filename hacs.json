@@ -1,5 +1,5 @@
 {
-    "name": "Pixelblaze (sythel)",
+    "name": "Pixelblaze-sythel",
     "hacs": "1.6.0",
     "domains": [
         "light"
