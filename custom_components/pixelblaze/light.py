@@ -89,9 +89,14 @@ class PixelblazeEntity(LightEntity):
                             pid = pb_config[PB_ACTIVE_PROG][PB_ACTIVE_PROG_ID]
                             if pid != self.active_pid:
                                 self.update_active_pattern(pb, pid)
+                except Exception as e:  # pylint:disable=broad-except,invalid-name
+                    _LOGGER.error(
+                        f"Failed to update pixelblaze device {self.id}@{self.host}: Exception: {e}"
+                    )
+                
         except Exception as e:  # pylint:disable=broad-except,invalid-name
             _LOGGER.error(
-                f"Failed to update pixelblaze device {self.id}@{self.host}: Exception: {e}"
+                f"Failed to open pixelblaze device {self.id}@{self.host}: Exception: {e}"
             )
 
     def update_pattern_list(self, pixelblaze: Pixelblaze):
