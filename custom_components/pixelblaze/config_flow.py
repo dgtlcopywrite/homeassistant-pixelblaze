@@ -22,7 +22,7 @@ def pixelblaze_connect(host: str):
     # pylint: disable=invalid-name
     try:
         pb = Pixelblaze(host)
-        dev_name = pb.getHardwareConfig()["name"]
+        dev_name = pb.getConfigSettings()["name"]
         if dev_name is None:
             dev_name = host
         pb.close()

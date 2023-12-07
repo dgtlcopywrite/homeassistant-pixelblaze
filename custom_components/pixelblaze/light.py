@@ -72,7 +72,7 @@ class PixelblazeEntity(LightEntity):
         try:
             pb = Pixelblaze(self.host)
             try:
-                pb_config = pb.getHardwareConfig()
+                pb_config = pb.getConfigSettings()
                 if PB_BRIGHTNESS not in pb_config:
                     _LOGGER.warning(f"Empty query hardware config for {self.id}")
                 else:
