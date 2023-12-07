@@ -1,6 +1,6 @@
 """Constants for the Pixelblaze integration."""
 
-DOMAIN = "pixelblaze"
+DOMAIN = "pixelblaze-sythel"
 
 CONFIG = "config"
 
