@@ -25,7 +25,7 @@ def pixelblaze_connect(host: str):
         dev_name = pb.getConfigSettings()["name"]
         if dev_name is None:
             dev_name = host
-        pb.close()
+        pb.stop()
         return dev_name
     except Exception as e:  # pylint:disable=broad-except
         _LOGGER.error(f"Unable to connect to {host}: Exception: {e}")

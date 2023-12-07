@@ -91,7 +91,7 @@ class PixelblazeEntity(LightEntity):
                             self.update_active_pattern(pb, pid)
 
             finally:
-                pb.close()
+                pb.stop()
         except Exception as e:  # pylint:disable=broad-except,invalid-name
             _LOGGER.error(
                 f"Failed to update pixelblaze device {self.id}@{self.host}: Exception: {e}"
@@ -178,7 +178,7 @@ class PixelblazeEntity(LightEntity):
                 self._last_brightness = self._brightness
                 self.schedule_update_ha_state()
             finally:
-                pb.close()
+                pb.stop()
         except Exception as e:  # pylint:disable=broad-except,invalid-name
             _LOGGER.error(
                 f"Failed to turn_off pixelblaze device {self.id}@{self.host}: Exception: {e}"
@@ -228,7 +228,7 @@ class PixelblazeEntity(LightEntity):
                             )
                 self.schedule_update_ha_state()
             finally:
-                pb.close()
+                pb.stop()
         except Exception as e:  # pylint:disable=broad-except,invalid-name
             _LOGGER.error(
                 f"Failed to turn_on pixelblaze device {self.id}@{self.host}: Exception: {e}"
