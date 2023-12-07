@@ -26,8 +26,6 @@ SUPPORTED_FEATURES_BASE = SUPPORT_BRIGHTNESS | SUPPORT_EFFECT
 COLOR_MODES_BASE = ()
 
 PB_BRIGHTNESS = "brightness"
-PB_ACTIVE_PROG_ID = "activeProgramId"
-PB_ACTIVE_PROG = "activeProgram"
 PB_SEQUENCER = "runSequencer"
 
 
@@ -86,7 +84,7 @@ class PixelblazeEntity(LightEntity):
                         if pb_config[PB_SEQUENCER]:
                             self._effect = EFFECT_SEQUENCER
                         else:
-                            pid = pb_config[PB_ACTIVE_PROG][PB_ACTIVE_PROG_ID]
+                            pid = pb.getActivePattern()
                             if pid != self.active_pid:
                                 self.update_active_pattern(pb, pid)
                 except Exception as e:  # pylint:disable=broad-except,invalid-name
@@ -176,7 +174,7 @@ class PixelblazeEntity(LightEntity):
         try:
             with Pixelblaze(self.host) as pb:
                 try:
-                    pb.setBrightness(0)
+                    pb.setBrightnessSlider(0)
                     self._last_brightness = self._brightness
                     self.schedule_update_ha_state()
                 except Exception as e:  # pylint:disable=broad-except,invalid-name
@@ -200,7 +198,7 @@ class PixelblazeEntity(LightEntity):
                         self._last_brightness = self._brightness
                     else:
                         self._brightness = self._last_brightness
-                    pb.setBrightness(self._brightness / 255)
+                    pb.setBrightnessSlider(self._brightness / 255)
 
                     if ATTR_EFFECT in kwargs:
                         self._effect = kwargs[ATTR_EFFECT]
