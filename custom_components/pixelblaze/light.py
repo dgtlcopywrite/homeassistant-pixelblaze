@@ -179,9 +179,13 @@ class PixelblazeEntity(LightEntity):
                     pb.setBrightness(0)
                     self._last_brightness = self._brightness
                     self.schedule_update_ha_state()
+                except Exception as e:  # pylint:disable=broad-except,invalid-name
+                    _LOGGER.error(
+                        f"Failed to update brightness to 0 on pixelblaze device {self.id}@{self.host}: Exception: {e}"
+                    )
         except Exception as e:  # pylint:disable=broad-except,invalid-name
             _LOGGER.error(
-                f"Failed to turn_off pixelblaze device {self.id}@{self.host}: Exception: {e}"
+                f"Failed to open pixelblaze device to turn brightness to 0 {self.id}@{self.host}: Exception: {e}"
             )
 
     def turn_on(self, **kwargs):
