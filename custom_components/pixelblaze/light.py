@@ -231,7 +231,11 @@ class PixelblazeEntity(LightEntity):
                                     (rgb[0] / 255, rgb[1] / 255, rgb[2] / 255),
                                 )
                     self.schedule_update_ha_state()
+                except Exception as e:  # pylint:disable=broad-except,invalid-name
+                    _LOGGER.error(
+                        f"Failed to turn_on pixelblaze device {self.id}@{self.host}: Exception: {e}"
+                    )
         except Exception as e:  # pylint:disable=broad-except,invalid-name
             _LOGGER.error(
-                f"Failed to turn_on pixelblaze device {self.id}@{self.host}: Exception: {e}"
+                f"Failed to open pixelblaze device to turn_on {self.id}@{self.host}: Exception: {e}"
             )
