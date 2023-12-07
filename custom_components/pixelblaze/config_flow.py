@@ -29,9 +29,8 @@ def pixelblaze_connect(host: str):
     except Exception as e:  # pylint:disable=broad-except
         _LOGGER.error(f"Unable to connect to {host}: Exception: {e}")
         return None
-    finally:
-        _LOGGER.error(f"Unable to connect to {host}: Exception: {e}")
-        return None
+    _LOGGER.debug(f"Empty Pixelblaze Name for host: {host}")
+    return None
 
 
 async def validate_input(hass: core.HomeAssistant, data):
