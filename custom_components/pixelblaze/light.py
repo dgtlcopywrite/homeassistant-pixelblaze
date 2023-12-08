@@ -204,10 +204,10 @@ class PixelblazeEntity(LightEntity):
                         self._effect = kwargs[ATTR_EFFECT]
                         if EFFECT_SEQUENCER == self._effect:
                             self._supported = SUPPORTED_FEATURES_BASE
-                            pb.setSequencerState(True, False)
+                            pb.setSequencerState(True)
                         else:
                             # Stop any sequencer and find the matching patternID to the name
-                            pb.setSequencerState(False, False)
+                            pb.setSequencerState(False)
                             for pid, pname in self.patternlist.items():
                                 if self._effect == pname:
                                     pb.setActivePattern(pid)
