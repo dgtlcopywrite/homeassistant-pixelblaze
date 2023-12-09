@@ -27,6 +27,7 @@ COLOR_MODES_BASE = ()
 
 PB_BRIGHTNESS = "brightness"
 PB_SEQUENCER = "runSequencer"
+PB_SAVE_UPDATES_TO_FLASH = True
 
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
@@ -174,7 +175,7 @@ class PixelblazeEntity(LightEntity):
         try:
             with Pixelblaze(self.host) as pb:
                 try:
-                    pb.setBrightnessSlider(0)
+                    pb.setBrightnessSlider(0, saveToFlash=PB_SAVE_UPDATES_TO_FLASH)
                     self._last_brightness = self._brightness
                     self.schedule_update_ha_state()
                 except Exception as e:  # pylint:disable=broad-except,invalid-name
@@ -198,19 +199,19 @@ class PixelblazeEntity(LightEntity):
                         self._last_brightness = self._brightness
                     else:
                         self._brightness = self._last_brightness
-                    pb.setBrightnessSlider(self._brightness / 255)
+                    pb.setBrightnessSlider(self._brightness / 255, saveToFlash=PB_SAVE_UPDATES_TO_FLASH)
 
                     if ATTR_EFFECT in kwargs:
                         self._effect = kwargs[ATTR_EFFECT]
                         if EFFECT_SEQUENCER == self._effect:
                             self._supported = SUPPORTED_FEATURES_BASE
-                            pb.setSequencerState(True)
+                            pb.setSequencerState(True, saveToFlash=PB_SAVE_UPDATES_TO_FLASH)
                         else:
                             # Stop any sequencer and find the matching patternID to the name
-                            pb.setSequencerState(False)
+                            pb.setSequencerState(False, saveToFlash=PB_SAVE_UPDATES_TO_FLASH)
                             for pid, pname in self.patternlist.items():
                                 if self._effect == pname:
-                                    pb.setActivePattern(pid)
+                                    pb.setActivePattern(pid, saveToFlash=PB_SAVE_UPDATES_TO_FLASH)
                                     self.update_active_pattern(pb, pid)
                                     break
 
