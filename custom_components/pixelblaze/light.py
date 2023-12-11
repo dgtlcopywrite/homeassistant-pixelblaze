@@ -65,7 +65,10 @@ class PixelblazeEntity(LightEntity):
         self.active_pid = None
         self.patternlist = ()
 
-    async def async_device_update(self):
+    def device_update(self):
+        """
+            pixelblaze-client library is syncronous
+        """
         # pylint: disable=arguments-differ, invalid-name
         _LOGGER.debug(f"Device Update for {self.id}")
         try:
