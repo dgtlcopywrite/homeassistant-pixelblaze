@@ -1,12 +1,12 @@
 {
-  "domain": "pixelblaze-sythel",
-  "name": "Pixelblaze-sythel",
+  "domain": "pixelblaze-dgtlcopywrite",
+  "name": "Pixelblaze-dgtlcopywrite",
   "config_flow": true,
   "documentation": "https://github.com/vutang50/homeassistant-pixelblaze",
   "issue_tracker": "https://github.com/vutang50/homeassistant-pixelblaze/issues",
   "requirements": [
     "websocket-client>=1.0.0",
-    "pixelblaze-client==1.1.2"
+    "pixelblaze-client>=1.1.2, <1.2"
   ],
   "ssdp": [],
   "zeroconf": [],
@@ -15,5 +15,5 @@
   "codeowners": [
     "@vutang50"
   ],
-  "version": "2023.12"
+  "version": "2024.09"
 }
